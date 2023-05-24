@@ -1,19 +1,19 @@
-"use strict";
+'use strict';
 
-const mongoose = require('mongoose'),
-        Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const PetSchema = new Schema({
-    name            : { type: String, required: true }
-  , species         : { type: String }
-  , birthday        : { type: Date }
-  , picUrl          : { type: String }
-  , picUrlSq        : { type: String }
-  , favoriteFood    : { type: String }
-  , description     : { type: String }
+  name: {type: String, required: true},
+  species: {type: String},
+  birthday: {type: Date},
+  picUrl: {type: String},
+  picUrlSq: {type: String},
+  favoriteFood: {type: String},
+  description: {type: String},
 },
 {
-  timestamps: true
+  timestamps: true,
 });
 
 module.exports = mongoose.model('Pet', PetSchema);
