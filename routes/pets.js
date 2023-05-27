@@ -19,7 +19,8 @@ module.exports = (app) => {
           res.redirect(`/pets/${pet._id}`);
         })
         .catch((err) => {
-        // Handle Errors
+        // STATUS OF 400 FOR VALIDATIONS
+          res.status(400).send(err.errors);
         });
   });
 
