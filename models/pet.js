@@ -21,6 +21,11 @@ const PetSchema = new Schema({
   timestamps: true,
 });
 
+// eslint-disable-next-line max-len
+// PetSchema.index({name: 'text', species: 'text', favoriteFood: 'text', description: 'text'}, {name: 'My text index', weights: {name: 10, species: 4, favoriteFood: 2, description: 1}});
+// without weights
+// eslint-disable-next-line max-len
+PetSchema.index({name: 'text', species: 'text', favoriteFood: 'text', description: 'text'});
 PetSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Pet', PetSchema);

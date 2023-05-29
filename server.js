@@ -1,4 +1,30 @@
 /* eslint-disable no-unused-vars */
+// require mailgun dependencies
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+// create a mailgunner
+// eslint-disable-next-line max-len
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+
+// SEND EMAIL
+const user = {
+  email: 'c.wood1011@pm.me',
+  name: 'Chris',
+  age: '21',
+};
+mg.messages.create('process.env.MAILGUN_BASE_URL', {
+  from: 'Excited User <mailgun@sandbox-123.mailgun.org>',
+  to: ['test@example.com'],
+  subject: 'Hello',
+  text: 'Testing some Mailgun awesomeness!',
+  html: '<h1>Testing some Mailgun awesomeness!</h1>',
+}).then((info) => {
+  console.log('Response: ' + info);
+}).catch((err) => {
+  console.log('Error: ' + err);
+});
+
 if (!process.env.PORT) {
   require('dotenv').config();
   process.env.NODE_ENV = 'dev';
@@ -15,7 +41,7 @@ const methodOverride = require('method-override');
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/local', {
+mongoose.connect('mongodb://localhost/petespets', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -37,7 +63,6 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
 
 require('./routes/index.js')(app);
 require('./routes/pets.js')(app);
