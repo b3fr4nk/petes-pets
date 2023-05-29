@@ -1,34 +1,25 @@
 /* eslint-disable no-unused-vars */
-// require mailgun dependencies
-const formData = require('form-data');
-const Mailgun = require('mailgun.js');
-const mailgun = new Mailgun(formData);
-// create a mailgunner
-// eslint-disable-next-line max-len
-const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
-
-// SEND EMAIL
-const user = {
-  email: 'c.wood1011@pm.me',
-  name: 'Chris',
-  age: '21',
-};
-mg.messages.create('process.env.MAILGUN_BASE_URL', {
-  from: 'Excited User <mailgun@sandbox-123.mailgun.org>',
-  to: ['test@example.com'],
-  subject: 'Hello',
-  text: 'Testing some Mailgun awesomeness!',
-  html: '<h1>Testing some Mailgun awesomeness!</h1>',
-}).then((info) => {
-  console.log('Response: ' + info);
-}).catch((err) => {
-  console.log('Error: ' + err);
-});
-
 if (!process.env.PORT) {
   require('dotenv').config();
   process.env.NODE_ENV = 'dev';
 }
+// require mailgun dependencies
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+// eslint-disable-next-line max-len
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY});
+
+// TEST EMAIL
+// mg.messages.create(process.env.EMAIL_DOMAIN, {
+//   from: `Excited User <mailgun@${process.env.EMAIL_DOMAIN}>`,
+//   to: ['c.wood1011@pm.me'],
+//   subject: 'Hello',
+//   text: 'Testing some Mailgun awesomeness!',
+//   html: '<h1>Testing some Mailgun awesomeness!</h1>',
+// })
+//     .then((msg) => console.log(msg)) // logs response data
+//     .catch((err) => console.log(err)); // logs any error
 
 const express = require('express');
 const path = require('path');
