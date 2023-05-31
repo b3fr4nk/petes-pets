@@ -75,4 +75,35 @@ module.exports = (app) => {
           }
         });
   });
+
+  // PURCHASE PET
+  app.post('/pets/:id/purchase', (req, res) => {
+    console.log(req.body);
+
+    const stripe = require('stripe')(process.env.PRIVATE_STRIPE_API_KEY);
+    // Token is created using Checkout or Elements!
+    // Get the payment token ID submitted by the form:
+    const token = req.body.stripeToken; // Using Express
+    // req.body.petId can become null through seeding,
+    // this way we'll insure we use a non-null value
+    const petId = req.body.petId || req.params.id;
+    Pet.findById(petId).exec((err, pet)=> {
+      if (err) {
+        console.log('Error: ' + err);
+        res.redirect(`/pets/${req.params.id}`);
+      }
+      // eslint-disable-next-line no-unused-vars
+      const charge = stripe.charges.create({
+        amount: pet.price * 100,
+        currency: 'usd',
+        description: `Purchased ${pet.name}, ${pet.species}`,
+        source: token,
+      }).then((chg) => {
+        res.redirect(`/pets/${req.params.id}`);
+      })
+          .catch((err) => {
+            console.log('Error:' + err);
+          });
+    });
+  });
 };
