@@ -3,10 +3,10 @@ extends layout
 block content
   .row
     .col-sm-4
-      if pet.avatarUrl
-        img.card-img-top(src=pet.avatarUrl + '-square.', alt='Card image cap')
+      if true 
+        img.card-img-top(src=pet.avatar + '-square.')
       else
-        img.card-img-top(src=pet.picUrlSq, alt='Card image cap')
+        img.card-img-top(src='Card image cap', alt='Card image cap')
     .col-sm-8
       h1=pet.name
       p=pet.species

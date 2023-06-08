@@ -48,20 +48,20 @@ module.exports = (app) => {
             console.log(err);
             return res.status(400).send({err: err});
           };
-          // remove square and standard from url
-          versions.forEach(function(image) {
-            const urlArray = image.url.split('-');
-            urlArray.pop();
-            const url = urlArray.join('-');
-            pet.avatarUrl = url;
-            pet.save();
-          });
+          // console.log(versions[0].url);
+          const urlArray = versions[0].url.split('-standard');
+          urlArray.pop();
+          const url = urlArray.join();
+          console.log(url);
+          pet.avatar = url;
+          pet.save();
           res.send({pet: pet});
         });
       } else {
         res.send({pet: pet});
       }
     });
+    console.log(Pet.findOne({name: pet.name}).avatar);
   });
 
   // SHOW PET

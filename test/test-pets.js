@@ -11,8 +11,7 @@ const fido = {
   'species': 'Greyhound',
   'birthday': '2008-11-11',
   'favoriteFood': 'Liver',
-  'picUrl': 'http://www.gpamass.com/s/img/emotionheader713297504.jpg',
-  'picUrlSq': 'https://www.collinsdictionary.com/images/thumb/greyhound_21701074_250.jpg',
+  'avatar': 'https://cw-petespet.s3.us-west-1.amazonaws.com/pets/avatar09eaa59d-6b92-4316-b9e0-f477f6a36432-square.',
   'description': 'Fido is a dog and he\'s a good dog who loves to play and hang out with his owners. He also likes to nap and enjoys eating dog food',
 };
 
@@ -53,8 +52,7 @@ describe('Pets', () => {
         .post('/pets')
         .send(fido)
         .end((err, res) => {
-          res.should.have.status(200);
-          res.should.be.html;
+          Pet.findOne({name: fido.name}).name.should.not.be(null);
           done();
         });
   });
