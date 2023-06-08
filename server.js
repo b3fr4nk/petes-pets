@@ -3,6 +3,17 @@ if (!process.env.PORT) {
   require('dotenv').config();
   process.env.NODE_ENV = 'dev';
 }
+// const AWS = require('aws-sdk');
+// const s3 = new AWS.S3();
+// (async (body, key) => {
+//   await s3.putObject({
+//     Body: 'hello world',
+//     Bucket: 'cw-petespet',
+//     Key: 'myfile.txt',
+//   })
+//       .promise();
+// })();
+
 // require mailgun dependencies
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
