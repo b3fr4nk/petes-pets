@@ -43,7 +43,7 @@ const methodOverride = require('method-override');
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://petes-pets-db-1:27018', {
+mongoose.connect('mongodb://srv-captain--mongo:27018', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
