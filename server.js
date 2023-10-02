@@ -43,7 +43,7 @@ const methodOverride = require('method-override');
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb://srv-captain--mongo:${process.env.MONGO_PASSWORD}`, {
+mongoose.connect(`${process.env.MONGO_CONNECTION}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
